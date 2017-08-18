@@ -66,77 +66,77 @@ OpenCV是一个基于BSD许可（开源）发行的跨平台计算机视觉库�
 Createsamples程序的命令行参数：  
 命令行参数：  
 －vec <vec_file_name>  
-`训练好的正样本的输出文件名。`
+`训练好的正样本的输出文件名。`  
 －img<image_file_name>  
-`源目标图片（例如：一个公司图标）`
-－bg<background_file_name> 
-`背景描述文件。` 
-－num<number_of_samples>  
-`要产生的正样本的数量，和正样本图片数目相同。`  
-－bgcolor<background_color>  
-`背景色（假定当前图片为灰度图）。背景色制定了透明色。对于压缩图片，颜色方差量由bgthresh参数来指定。则在bgcolor－bgthresh和bgcolor＋bgthresh中间的像素被认为是透明的。`
-－bgthresh<background_color_threshold>
-－inv
-`如果指定，颜色会反色`
-－randinv
-`如果指定，颜色会任意反色`
-－maxidev<max_intensity_deviation>
-`背景色最大的偏离度。`
-－maxangel<max_x_rotation_angle>
-－maxangle<max_y_rotation_angle>，
-－maxzangle<max_x_rotation_angle>
-`最大旋转角度，以弧度为单位。`
-－show
-`如果指定，每个样本会被显示出来，按下"esc"会关闭这一开关，即不显示样本图片，而创建过程继续。这是个有用的debug选项。`
-－w<sample_width>  
-`输出样本的宽度（以像素为单位）` 
-－h《sample_height》
-`输出样本的高度，以像素为单位`  
-  
-（5） 创建负样本描述文件  
+`源目标图片（例如：一个公司图标）`  
+－bg<background_file_name>  
+`背景描述文件。`  
+－num<number_of_samples>    
+`要产生的正样本的数量，和正样本图片数目相同。`    
+－bgcolor<background_color>    
+`背景色（假定当前图片为灰度图）。背景色制定了透明色。对于压缩图片，颜色方差量由bgthresh参数来指定。则在bgcolor－bgthresh和bgcolor＋bgthresh中间的像素被认为是透明的。`  
+－bgthresh<background_color_threshold>  
+－inv  
+`如果指定，颜色会反色`  
+－randinv  
+`如果指定，颜色会任意反色`  
+－maxidev<max_intensity_deviation>   
+`背景色最大的偏离度。`  
+－maxangel<max_x_rotation_angle>  
+－maxangle<max_y_rotation_angle>    
+－maxzangle<max_x_rotation_angle>  
+`最大旋转角度，以弧度为单位。`  
+－show  
+`如果指定，每个样本会被显示出来，按下"esc"会关闭这一开关，即不显示样本图片，而创建过程继续。这是个有用的debug选项。`  
+－w<sample_width>    
+`输出样本的宽度（以像素为单位）`   
+－h《sample_height》  
+`输出样本的高度，以像素为单位`    
+   
+（5） 创建负样本描述文件   
 
 `在保存负样本的文件夹下生成一个负样本描述文件，具体步骤同（3），此处不再赘叙`   
 
-（6）进行样本训练  
+（6）进行样本训练    
 `该步骤通过调用OpenCV\bin目录下的haartraining程序(新版本的opencv改名为opencv_haartraining)来完成。其中，Haartraining的命令行参数为：`
-－data<dir_name>  
+－data<dir_name>   
 `存放训练好的分类器的路径名。`  
-－vec<vec_file_name>  
-`正样本文件名（由trainingssamples程序或者由其他的方法创建的）`  
-－bg<background_file_name>  
-`背景描述文件。`  
-－npos<number_of_positive_samples>，  
-－nneg<number_of_negative_samples>  
-`用来训练每一个分类器阶段的正/负样本。合理的值是：nPos = 7000;nNeg = 3000 ` 
-－nstages<number_of_stages>  
-`训练的级联分类器层数。  `
-－nsplits<number_of_splits>  
-`决定用于阶段分类器的弱分类器。如果1，则一个简单的stump classifier被使用。如果是2或者更多，则带有number_of_splits个内部节点的CART分类器被使用。`  
-－mem<memory_in_MB>   
-`预先计算的以MB为单位的可用内存。内存越大则训练的速度越快。`
-－sym（default）  
-－nonsym  
-`指定训练的目标对象是否垂直对称。垂直对称提高目标的训练速度。例如，正面部是垂直对称的。`  
-－minhitrate《min_hit_rate》  
-`每个阶段分类器需要的最小的命中率。总的命中率为min_hit_rate的number_of_stages次方。`  
-－maxfalsealarm<max_false_alarm_rate>  
-`没有阶段分类器的最大错误报警率。总的错误警告率为max_false_alarm_rate的number_of_stages次方。`  
-－weighttrimming<weight_trimming>  
-`指定是否使用权修正和使用多大的权修正。一个基本的选择是0.9`  
-－eqw  
-－mode<basic(default)|core|all>  
-`选择用来训练的haar特征集的种类。basic仅仅使用垂直特征。all使用垂直和45度角旋转特征。`  
-－w《sample_width》  
-－h《sample_height》  
-`训练样本的尺寸，（以像素为单位）。必须和训练样本创建的尺寸相同。`  
-一个训练分类器的例子：  
-"D:\Program Files\OpenCV\bin\haartraining.exe"   -data data\cascade -vec data\pos.vec -bg negdata\negdata.dat -npos 49 -nneg 49 -mem 200 -mode ALL -w 20 -h 20  
+－vec<vec_file_name>    
+`正样本文件名（由trainingssamples程序或者由其他的方法创建的）`    
+－bg<background_file_name>   
+`背景描述文件。`   
+－npos<number_of_positive_samples>     
+－nneg<number_of_negative_samples>    
+`用来训练每一个分类器阶段的正/负样本。合理的值是：nPos = 7000;nNeg = 3000 `  
+－nstages<number_of_stages>   
+`训练的级联分类器层数。  `  
+－nsplits<number_of_splits>   
+`决定用于阶段分类器的弱分类器。如果1，则一个简单的stump classifier被使用。如果是2或者更多，则带有number_of_splits个内部节点的CART分类器被使用。`    
+－mem<memory_in_MB>     
+`预先计算的以MB为单位的可用内存。内存越大则训练的速度越快。`  
+－sym（default）   
+－nonsym   
+`指定训练的目标对象是否垂直对称。垂直对称提高目标的训练速度。例如，正面部是垂直对称的。`   
+－minhitrate《min_hit_rate》   
+`每个阶段分类器需要的最小的命中率。总的命中率为min_hit_rate的number_of_stages次方。`    
+－maxfalsealarm<max_false_alarm_rate>   
+`没有阶段分类器的最大错误报警率。总的错误警告率为max_false_alarm_rate的number_of_stages次方。`    
+－weighttrimming<weight_trimming>    
+`指定是否使用权修正和使用多大的权修正。一个基本的选择是0.9`    
+－eqw   
+－mode<basic(default)|core|all>   
+`选择用来训练的haar特征集的种类。basic仅仅使用垂直特征。all使用垂直和45度角旋转特征。`   
+－w《sample_width》   
+－h《sample_height》   
+`训练样本的尺寸，（以像素为单位）。必须和训练样本创建的尺寸相同。`   
+一个训练分类器的例子：   
+"D:\Program Files\OpenCV\bin\haartraining.exe"   -data data\cascade -vec data\pos.vec -bg negdata\negdata.dat -npos 49 -nneg 49 -mem 200 -mode ALL -w 20 -h 20   
   
-训练结束后，会在目录data下生成一些子目录，即为训练好的分类器。  
+训练结束后，会在目录data下生成一些子目录，即为训练好的分类器。   
   
-（7） 生成xml文件  
+（7） 生成xml文件   
   
-`上一步在进行haartraining的时候，会在data目录下生成一些目录及txt文件，我们需要调用opencv\bin\haarconv.exe将这些txt文件转换为xml文件，也就是所谓的分类器。` 
+`上一步在进行haartraining的时候，会在data目录下生成一些目录及txt文件，我们需要调用opencv\bin\haarconv.exe将这些txt文件转换为xml文件，也就是所谓的分类器。`   
 
 
  
